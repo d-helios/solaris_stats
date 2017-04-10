@@ -1,0 +1,4 @@
+# ENVIRONMENT FILE
+HOSTNAME=`hostname`
+INFLUX_SRV='srv5-mugoto.net.billing.ru'
+export INFLUX_SRV
