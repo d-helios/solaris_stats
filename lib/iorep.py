@@ -12,7 +12,7 @@ from subprocess import check_call
 # influx server
 influx_db = os.environ['INFLUX_SRV']
 
-HEADERS = [ 'read_ops', 'read_bytes', 'write_ops', 'wirte_bytes', 'rddir_ops', 'rddir_bytes', 'rwlock', 'rwunlock' ]
+HEADERS = [ 'read_ops', 'read_bytes', 'write_ops', 'write_bytes', 'rddir_ops', 'rddir_bytes', 'rwlock', 'rwunlock' ]
 
 def isfloat( val ):
     try:
