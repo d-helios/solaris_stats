@@ -18,15 +18,16 @@ def isfloat( val ):
     try:
         float(val)
         return True
-    except ValueError:
+    except ValueError, e:
         return False
 
 
 #: influxdb sender
 def send2influx(key, val):
-    v_url="http://%s:8086/write?db=znstor" % influx_db
+    v_url="http://%s:8086/write?db=znstor" % (influx_db)
     v_headers={'Content-Type': 'application/octet-stream'}
-    v_data='%s,host=%s value=%s' % (key, socket.gethostname(), val)
+    v_data='fsstat,host=%s %s=%s' % (socket.gethostname(), key, val)
+    print v_data
 
     r = requests.post(url=v_url, data=v_data, headers=v_headers)
 
@@ -72,9 +73,10 @@ if __name__ == "__main__":
     divnum = 15
 
     import sys
-    
+
+   
     for line in read_stdin():
-        if not re.search (r'^[0-9].+', line):
+        if not re.search(r'^[0-9].+', line.strip()):
             skiped_lines += 1
             continue
 
@@ -82,7 +84,7 @@ if __name__ == "__main__":
             skiped_lines += 1
             continue
 
-        line = re.sub( ' +',' ' , line).split(' ')[0:8]
+        line = re.sub( ' +',' ' , line.strip()).split(' ')[0:8]
 
         if len(line) == 8:
             line = map(human2bytes, line)
